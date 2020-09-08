@@ -1,0 +1,58 @@
+---
+title: "UCI HAR Dataset Project Code Book"
+output: 
+    html_document:
+        keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+This project reads in files from the UCI HAR Dataset and creates two tidy
+datasets as R data.frame objects.
+
+The project uses the dplyr and readr packages.
+
+```{r echo=TRUE, warning=FALSE, message=FALSE}
+source("run_analysis.R")
+```
+
+## Dataset: combined_data
+
+The first dataset, combined_data, joins the information from the
+following files:
+
+* UCI HAR Dataset/activity_labels.txt: maps activity ID to activity name
+* UCI HAR Dataset/features.txt: maps column index to variable name (561 variables)
+* UCI HAR Dataset/train/X_train.txt: numeric train data, 561 columns, 1 for each variable
+* UCI HAR Dataset/train/Y_train.txt: integer activity ID for each row of train data
+* UCI HAR Dataset/train/subject_train.txt: integer subject ID for each row of train data
+* UCI HAR Dataset/test/X_test.txt: numeric test data, 561 columns, 1 for each variable
+* UCI HAR Dataset/test/Y_test.txt: integer activity ID for each row of test data
+* UCI HAR Dataset/test/subject_test.txt: integer subject ID for each row of test data
+
+A subset of 66 variables computing the mean and standard deviation of each 
+measurement was selected from the original list of 561 variables. For more 
+detailed information about the original dataset, see UCI HAR Dataset/README.txt 
+and UCI HAR Dataset/features_info.txt.
+
+The activity ID was converted from an integer to a text descriptor (factor 
+variable).  A test/train subset identifier (factor variable) was created to
+identify the subset in the combined dataset.
+
+The combined_data dataset joins the subset ID, subject ID, and activity ID 
+columns to the data variables and combines the test and train data in a single table.
+
+```{r, combined_data_info}
+str(combined_data)
+```
+
+## Dataset: summarized_data
+
+The second dataset, summarized_data, computes the mean value of the 66 variables
+for each subject and activity.
+
+```{r, summarized_data_info}
+str(summarized_data)
+```
