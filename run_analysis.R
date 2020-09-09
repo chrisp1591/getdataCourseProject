@@ -116,6 +116,7 @@ testdata <- bind_cols(subset=subsettest, subjtestdata,
 
 ## combine train and test subsets into a single dataset
 combined_data <- bind_rows(traindata,testdata)
+write.table(combined_data,"combined_data.txt", row.names = FALSE)
 
 ## ===============================
 ## Tidy Dataset 2: summarized_data
@@ -127,3 +128,4 @@ summarized_data <- combined_data %>%
     group_by(subject_id,activity) %>%
     summarize(across(all_of(x_fwfpos$col_names), mean, .names = "mean_{.col}"),
               .groups = "drop")
+write.table(summarized_data,"summarized_data.txt", row.names = FALSE)

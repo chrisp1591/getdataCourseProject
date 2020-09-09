@@ -13,6 +13,15 @@ The script that imports the data from the original data files to generate the
 tidy dataset is:
 run_analysis.R
 
+The script uses the readr and dplyr packages. It will create the two datasets
+as local variables in R (combined_data and summarized data) and also write the
+datasets to the working directory as text files ("combined_data.txt" and
+"summarized_data.txt").
+
+The script expects data to be in subdirectory "UCI HAR Dataset" and will try
+to unpack the original zipfile if the subdirectory does not exist. 
+
+
 The code book that describes the variables, data, and transformations is:
 CodeBook.md (generated from CodeBook.Rmd by knitr)
 
