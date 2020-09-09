@@ -14,7 +14,7 @@ tidy dataset is:
 run_analysis.R
 
 The code book that describes the variables, data, and transformations is:
-CodeBook.md
+CodeBook.md (generated from CodeBook.Rmd by knitr)
 
 ## Assignment Instructions
 
