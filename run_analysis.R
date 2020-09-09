@@ -10,7 +10,7 @@ if(!file.exists(datadir)) {
     unzip(zipfile)
 }
 
-## dataFileInfo: reads in data file and print some info about it
+## dataFileInfo: read a data file and print some info about it
 dataFileInfo <- function (filename,n=NULL) {
     rlines <- readLines(filename)
     print(length(rlines))
@@ -20,7 +20,6 @@ dataFileInfo <- function (filename,n=NULL) {
         print(head(rlines,n=n))
     }
 }
-
 
 ## Load activity index to activity name mapping
 ## each line has index and name separated by a space
@@ -47,7 +46,10 @@ x_coltype <- paste0(rep("d",length(x_vars)),collapse="")
 x_fwfpos$col_names <- sub("\\()","",x_fwfpos$col_names)
 x_fwfpos$col_names <- gsub("[-,]","_",x_fwfpos$col_names)
 
+## ======================
 ## Load train data subset
+## ======================
+
 ## train data subdirectory
 traindir <- paste(datadir,"train",sep="/")
 
@@ -76,7 +78,10 @@ subsettrain <- factor(rep("train",trainrows), c("train","test"))
 traindata <- bind_cols(subset=subsettrain, subjtraindata, 
                        activity=ytrainfactor, xtraindata)
 
+## ======================
 ## Load test data subset
+## ======================
+
 ## test data subdirectory
 testdir <- paste(datadir,"test",sep="/")
 
@@ -105,8 +110,16 @@ subsettest <- factor(rep("test",testrows), c("train","test"))
 testdata <- bind_cols(subset=subsettest, subjtestdata, 
                       activity=ytestfactor, xtestdata)
 
+## ===============================
+## Tidy Dataset 1: combined_data
+## ===============================
+
 ## combine train and test subsets into a single dataset
 combined_data <- bind_rows(traindata,testdata)
+
+## ===============================
+## Tidy Dataset 2: summarized_data
+## ===============================
 
 ## create a tidy dataset with the mean of each variable for each
 ## subject and activity.
